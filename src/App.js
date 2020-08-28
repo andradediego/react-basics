@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Person from './Person/Person'
 
 
-class App extends Component {
-  state = {
+const App = props => {
+  const [ personsState, setPersonsSate ] = useState({
     persons: [
       {
         name: 'Diego',
@@ -16,17 +16,17 @@ class App extends Component {
         age: 36
       },
       {
-        name: 'Joe',
+        name: 'Dave',
         age: 30
       }
     ],
     hobbie: 'My hobbie is baseball'
-  }
+  });
 
-  switchNameHandler = () => {
+  const switchNameHandler = () => {
     // DO NOT DO THIS
     // this.state.persons[0].name = 'Jane';
-    this.setState({
+    setPersonsSate({...personsState,
       persons: [
         {
           name: 'Diego Andrade',
@@ -34,7 +34,7 @@ class App extends Component {
         },
         {
           name: 'Josy',
-          age: 38
+          age: 22
         },
         {
           name: 'Joe',
@@ -43,29 +43,35 @@ class App extends Component {
       ]
     });
   }
-
-  render() {
-    return (
-      <div>        
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-            </div>
-            <div className="col-md-4">
-              <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-            </div>
-            <div className="col-md-4">
-              <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>{this.state.hobbie}</Person>
-            </div>
-          </div>        
-          <div className="row">
-            <button className='btn btn-default' onClick={this.switchNameHandler}>Switch Name</button>
+  
+  return (
+    <div>        
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
           </div>
+          <div className="col-md-4">
+            <Person name={personsState.persons[1].name} age={personsState.persons[1].age}/>
+          </div>
+          <div className="col-md-4">
+            <Person name={personsState.persons[2].name} age={personsState.persons[2].age}>{personsState.hobbie}</Person>
+          </div>
+        </div> 
+        <hr/>       
+        <div className="row">
+          <button className='btn btn-default' onClick={switchNameHandler}>Switch Name</button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+  
 }
 
 export default App;
+
+
+
+
+
+
