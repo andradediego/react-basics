@@ -1,18 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Person from './Person/Person'
+
 
 class App extends Component {
+  state = {
+    persons: [
+      {
+        name: 'Diego',
+        age: 35
+      },
+      {
+        name: 'Josy',
+        age: 36
+      },
+      {
+        name: 'Joe',
+        age: 30
+      }
+    ],
+    hobbie: 'My hobbie is baseball'
+  }
+
+  switchNameHandler = () => {
+    // DO NOT DO THIS
+    // this.state.persons[0].name = 'Jane';
+    this.setState({
+      persons: [
+        {
+          name: 'Diego Andrade',
+          age: 35
+        },
+        {
+          name: 'Josy',
+          age: 38
+        },
+        {
+          name: 'Joe',
+          age: 30
+        }
+      ]
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>        
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
+            </div>
+            <div className="col-md-4">
+              <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
+            </div>
+            <div className="col-md-4">
+              <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>{this.state.hobbie}</Person>
+            </div>
+          </div>        
+          <div className="row">
+            <button className='btn btn-default' onClick={this.switchNameHandler}>Switch Name</button>
+          </div>
+        </div>
       </div>
     );
   }
